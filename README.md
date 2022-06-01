@@ -3,8 +3,11 @@ Terraform Test - not a WC3 Addon :)
 
 # Install WSL
 Source: https://docs.microsoft.com/en-us/windows/wsl/install-manual
+
+```powershell
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
 
 # Install Docker Desktop (for Windows)
 Source: https://docs.docker.com/desktop/windows/install/
@@ -23,7 +26,7 @@ ssh-keygen
 ```bash
 git clone git@github.com:tp199314/tft.git
 git config --global user.name "tp199314"
-git config --global user.mail "fake@example.de"
+git config --global user.mail "my.real@mailadress.gg"
 ```
 
 # Install Terraform on Ubuntu (WSL)
@@ -38,4 +41,16 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt-get update && sudo apt-get install terraform
 
 terraform -install-autocomplete
+
+sudo apt-get install jq -y
+```
+
+# Terraform example
+Source: https://app.terraform.io/app/getting-started/example
+
+Did the git clone part with a dirty copy & paste :)
+```bash
+terraform login
+git clone https://github.com/hashicorp/tfc-getting-started.git
+cd tfc-getting-started && ./scripts/setup.sh
 ```
