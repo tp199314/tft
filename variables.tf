@@ -17,3 +17,7 @@ variable "client_secret" {
 variable "tenant_id" {
   type = string
 }
+
+variable "resource_group_name_prefix" {
+  type = string
+}
