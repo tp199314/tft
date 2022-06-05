@@ -46,11 +46,10 @@ sudo apt-get install jq -y
 ```
 
 # Terraform example
-Source: https://app.terraform.io/app/getting-started/example
+https://www.youtube.com/watch?v=NBC3mu75pEU
 
-Did the git clone part with a dirty copy & paste :)
-```bash
-terraform login
-git clone https://github.com/hashicorp/tfc-getting-started.git
-cd tfc-getting-started && ./scripts/setup.sh
+# Azure Subscription
+```powershell
+az login
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/xxx"
 ```
