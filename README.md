@@ -53,3 +53,5 @@ https://www.youtube.com/watch?v=NBC3mu75pEU
 az login
 az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/xxx"
 ```
+
+https://docs.microsoft.com/de-de/azure/developer/terraform/create-linux-virtual-machine-with-infrastructure
