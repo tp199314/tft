@@ -106,14 +106,10 @@ resource "tls_private_key" "example_ssh" {
   rsa_bits  = 4096
 }
 
-# output "public_ip_address" {
-#   value = azurerm_linux_virtual_machine.myterraformvm.public_ip_address
-# }
-
-# output "tls_private_key" {
-#   value     = tls_private_key.example_ssh.private_key_pem
-#   sensitive = true
-# }
+output "tls_private_key" {
+  value     = tls_private_key.example_ssh.private_key_pem
+  sensitive = true
+}
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
@@ -161,7 +157,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
       host        = azurerm_linux_virtual_machine.myterraformvm.public_ip_address
       type        = "ssh"
       user        = azurerm_linux_virtual_machine.myterraformvm.admin_username
-      private_key = tls_private_key.example_ssh.public_key_openssh
+      private_key = tls_private_key.example_ssh.private_key_pem
     }
   }
 }
