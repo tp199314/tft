@@ -70,7 +70,7 @@ resource "azurerm_network_interface" "myterraformnic" {
   ip_configuration {
     name                          = "myNicConfiguration"
     subnet_id                     = azurerm_subnet.myterraformsubnet.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
     public_ip_address_id          = azurerm_public_ip.myterraformpublicip.id
   }
 }
@@ -138,5 +138,25 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
 
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
+  }
+}
+
+output "public_ip_address" {
+  value = azurerm_linux_virtual_machine.myterraformvm.public_ip_address
+}
+
+output "tls_private_key" {
+  value     = tls_private_key.example_ssh.private_key_pem
+  sensitive = true
+}
+
+provisioner "ssh-stuff" {
+  inline = ["sudo apt update; id; sudo apt install python3 -y", "echo Done!"]
+
+  connection {
+    host            = self.public_ip_address
+    type            = "ssh"
+    user            = azureuser
+    tls_private_key = self.tls_private_key
   }
 }

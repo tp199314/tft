@@ -55,3 +55,7 @@ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/xxx"
 ```
 
 https://docs.microsoft.com/de-de/azure/developer/terraform/create-linux-virtual-machine-with-infrastructure
+
+https://docs.microsoft.com/de-de/azure/virtual-machines/dv3-dsv3-series
+
+https://www.digitalocean.com/community/tutorials/how-to-use-ansible-with-terraform-for-configuration-management
