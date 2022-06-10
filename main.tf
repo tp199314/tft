@@ -106,6 +106,15 @@ resource "tls_private_key" "example_ssh" {
   rsa_bits  = 4096
 }
 
+output "public_ip_address" {
+  value = azurerm_linux_virtual_machine.myterraformvm.public_ip_address
+}
+
+output "tls_private_key" {
+  value     = tls_private_key.example_ssh.private_key_pem
+  sensitive = true
+}
+
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
   name                  = "myVM"
@@ -139,24 +148,16 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
   }
-}
 
-output "public_ip_address" {
-  value = azurerm_linux_virtual_machine.myterraformvm.public_ip_address
-}
+  provisioner "ssh-stuff" {
+    inline = ["sudo apt update; id; sudo apt install python3 -y", "echo Done!"]
 
-output "tls_private_key" {
-  value     = tls_private_key.example_ssh.private_key_pem
-  sensitive = true
-}
-
-provisioner "ssh-stuff" {
-  inline = ["sudo apt update; id; sudo apt install python3 -y", "echo Done!"]
-
-  connection {
-    host            = self.public_ip_address
-    type            = "ssh"
-    user            = azureuser
-    tls_private_key = self.tls_private_key
+    connection {
+      host            = self.public_ip_address
+      type            = "ssh"
+      user            = azureuser
+      tls_private_key = self.tls_private_key
+    }
   }
+
 }
