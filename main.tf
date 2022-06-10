@@ -141,7 +141,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
   disable_password_authentication = true
 
   admin_ssh_key {
-    username   = "azureuser"
+    username   = azurerm_linux_virtual_machine.myterraformvm.admin_username
     public_key = tls_private_key.example_ssh.public_key_openssh
   }
 
@@ -160,7 +160,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     connection {
       host            = azurerm_linux_virtual_machine.myterraformvm.public_ip_address
       type            = "ssh"
-      user            = azureuser
+      user            = azurerm_linux_virtual_machine.myterraformvm.admin_username
       tls_private_key = tls_private_key.example_ssh.public_key_openssh
     }
   }
