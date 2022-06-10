@@ -158,10 +158,10 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     ]
 
     connection {
-      host            = azurerm_linux_virtual_machine.myterraformvm.public_ip_address
-      type            = "ssh"
-      user            = azurerm_linux_virtual_machine.myterraformvm.admin_username
-      tls_private_key = tls_private_key.example_ssh.public_key_openssh
+      host        = azurerm_linux_virtual_machine.myterraformvm.public_ip_address
+      type        = "ssh"
+      user        = azurerm_linux_virtual_machine.myterraformvm.admin_username
+      private_key = tls_private_key.example_ssh.public_key_openssh
     }
   }
 }
